@@ -756,7 +756,7 @@ namespace p0wnedShell
                 return;
             }
 
-            string NetForest = "Get-NetForest forest.txt";
+            string NetForest = "Get-NetForest";
             string NetForestDomain = "Get-NetForestDomain";
             string NetForestTrust = "Get-NetForestTrust";
             string NetDomain = "Get-NetDomain";
@@ -968,12 +968,14 @@ namespace p0wnedShell
         {
             try
             {
-                string jawsscript = "jaws-enum -Outfile jaws.txt";
+                string jawsscript = "jaws-enum";
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n[+] Doing some enumeration for the local system....\n");
-                P0wnedListener.Execute(jawsscript);
-                Console.WriteLine("Output saved to jaws.txt. Press Enter to Continue...");
+                Console.ResetColor();
+                Console.Write(RunPSCommand(jawsscript));
+                Console.WriteLine("Press Enter to Continue...");
                 Console.ReadLine();
+                Console.WriteLine("Output saved to jaws.txt. Press Enter to Continue...");
             }
             catch (Exception e)
             {
@@ -1044,51 +1046,68 @@ namespace p0wnedShell
                 return;
             }
 
-            string NetForest = "Get-NetForest >> NetForest.txt";
-            string NetForestDomain = "Get-NetForestDomain >> NetForestdomain.txt";
-            string NetComputer = "Get-NetComputer >> NetSystems.txt";
-            string NetDomain = "Get-NetDomain >> Netdomain.txt";
-            string NetDomainTrust = "Get-NetDomainTrust >> Domaintrust.txt";
-            string Exploitablesystems = "Get-ExploitableSystem >> ExploitableSystems.txt";
-            string Printer = "Get-Printer >> NetPrinter.txt";
-            string NetSite = "Get-NetSite >> NetSite.txt";
-            string NetSubNet = "Get-NetSubnet >> NetSubnet.txt";
-            string NetGroup = "Get-NetGroup >> NetGroup.txt";
-            string NetGroupMember = "Get-NetGroupMember >> NetGroupMember.txt ";
-            string NetFileServer = "Get-NetFileServer >> NetFileServer.txt";
-            string DFSShare = "Get-DFSshare >> DFSshare.txt";
-            string NetShare = "Get-NetShare >> NetShare.txt ";
-            string NetLoggedon = "Get-NetLoggedon >> NetLoggedon";
-            string FindForeignUser = "Find-ForeignUser >> ForeignUser.txt";
-            string FindGoreignGroup = "Find-ForeignGroup >> ForeignGroup.txt";
-            string UnconstrainedComputers = "Get-DomainComputer -Unconstrained >> Unconstrained_Systems.txt";
-            string UnconstrainedUsers = "Get-DomainUser -AllowDelegation -AdminCount >> UnconstrainedDelegationUsers.txt";
-            string RDPAccess = "Get-DomainGPOUserLocalGroupMapping -Identity $env:UserName -LocalGroup RDP >> RDPAccess_Systems.txt";
-            string InterestingShares = "Find-InterestingDomainShareFile >> InterestingDomainshares.txt";
-
+            string NetForest = "Get-NetForest";
+            string NetForestDomain = "Get-NetForestDomain";
+            string NetComputer = "Get-NetComputer";
+            string NetDomain = "Get-NetDomain";
+            string NetDomainTrust = "Get-NetDomainTrust";
+            string Exploitablesystems = "Get-ExploitableSystem";
+            string Printer = "Get-Printer";
+            string NetSite = "Get-NetSite";
+            string NetSubNet = "Get-NetSubnet";
+            string NetGroup = "Get-NetGroup";
+            string NetGroupMember = "Get-NetGroupMember";
+            string NetFileServer = "Get-NetFileServer";
+            string DFSShare = "Get-DFSshare";
+            string NetShare = "Get-NetShare";
+            string NetLoggedon = "Get-NetLoggedon";
+            string FindForeignUser = "Find-ForeignUser";
+            string FindGoreignGroup = "Find-ForeignGroup";
+            string UnconstrainedComputers = "Get-DomainComputer -Unconstrained";
+            string UnconstrainedUsers = "Get-DomainUser -AllowDelegation -AdminCount";
+            string RDPAccess = "Get-DomainGPOUserLocalGroupMapping -Identity $env:UserName -LocalGroup RDP";
+            string InterestingShares = "Find-InterestingDomainShareFile";
             try
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n[+] Getting Domain / Forest / Computers..\n");
                 Console.ResetColor();
-                Console.WriteLine(RunPSCommand(NetForest));
-                Console.WriteLine(RunPSCommand(NetForestDomain));
-                Console.WriteLine(RunPSCommand(NetComputer));
-                Console.WriteLine(RunPSCommand(NetDomain));
-                Console.WriteLine(RunPSCommand(NetDomainTrust));
+                Console.Write(RunPSCommand(NetForest));
+                System.IO.File.WriteAllText(@"C:\temp\NetForest.txt", RunPSCommand(NetForest));
+                Console.Write(RunPSCommand(NetForestDomain));
+                System.IO.File.WriteAllText(@"C:\temp\NetForestDomain.txt", RunPSCommand(NetForestDomain));
+                Console.Write(RunPSCommand(NetComputer));
+                System.IO.File.WriteAllText(@"C:\temp\NetComputer.txt", RunPSCommand(NetComputer));
+                Console.Write(RunPSCommand(NetDomain));
+                System.IO.File.WriteAllText(@"C:\temp\NetDomain", RunPSCommand(NetDomain));
+                Console.Write(RunPSCommand(NetDomainTrust));
+                System.IO.File.WriteAllText(@"C:\temp\NetDomainTrust.txt", RunPSCommand(NetDomainTrust));
                 Console.WriteLine("Press Enter to Continue...");
                 Console.ReadLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("[+] Getting Exploitable Systems, Printers, Subnets, Groups, Group Members...\n");
+                Console.WriteLine("[+] Getting Printers, Subnets, Groups, Group Members...\n");
                 Console.ResetColor();
-                Console.WriteLine(RunPSCommand(Exploitablesystems));
+                Console.Write(RunPSCommand(Exploitablesystems));
+                System.IO.File.WriteAllText(@"C:\temp\ExploitableSystems.txt", RunPSCommand(Exploitablesystems));
+                Console.WriteLine("Press Enter to Continue...");
+                Console.ReadLine();
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[+] Getting Printers, Subnets, Groups, Group Members...\n");
+                Console.ResetColor();
                 Console.WriteLine(RunPSCommand(Printer));
+                System.IO.File.WriteAllText(@"C:\temp\Printers.txt", RunPSCommand(Printer));
                 Console.WriteLine(RunPSCommand(NetSite));
+                System.IO.File.WriteAllText(@"C:\temp\NetSite.txt", RunPSCommand(NetSite));
                 Console.WriteLine(RunPSCommand(NetSubNet));
+                System.IO.File.WriteAllText(@"C:\temp\NetSubnet.txt", RunPSCommand(NetSubNet));
                 Console.WriteLine(RunPSCommand(NetGroup));
+                System.IO.File.WriteAllText(@"C:\temp\NetGroup.txt", RunPSCommand(NetGroup));
                 Console.WriteLine(RunPSCommand(NetGroupMember));
+                System.IO.File.WriteAllText(@"C:\temp\NetGroupMember.txt", RunPSCommand(NetGroupMember));
                 Console.WriteLine(RunPSCommand(NetForestDomain));
+                System.IO.File.WriteAllText(@"C:\temp\NetForestDomain.txt", RunPSCommand(NetForestDomain));
                 Console.WriteLine("Press Enter to Continue...");
                 Console.ReadLine();
 
@@ -1096,9 +1115,13 @@ namespace p0wnedShell
                 Console.WriteLine("[+] Getting File Servers, DFS-Shares, Netshares...\n");
                 Console.ResetColor();
                 Console.WriteLine(RunPSCommand(NetFileServer));
+                System.IO.File.WriteAllText(@"C:\temp\NetFileServer.txt", RunPSCommand(NetFileServer));
                 Console.WriteLine(RunPSCommand(DFSShare));
+                System.IO.File.WriteAllText(@"C:\temp\DFSShares.txt", RunPSCommand(DFSShare));
                 Console.WriteLine(RunPSCommand(NetShare));
+                System.IO.File.WriteAllText(@"C:\temp\NetShare.txt", RunPSCommand(NetShare));
                 Console.WriteLine(RunPSCommand(InterestingShares));
+                System.IO.File.WriteAllText(@"C:\temp\InterestingShares.txt", RunPSCommand(InterestingShares));
                 Console.WriteLine("Press Enter to Continue...");
                 Console.ReadLine();
 
@@ -1106,17 +1129,29 @@ namespace p0wnedShell
                 Console.WriteLine("[+] Getting loggedon Users, foreign users, foreign groups...\n");
                 Console.ResetColor();
                 Console.WriteLine(RunPSCommand(NetLoggedon));
+                System.IO.File.WriteAllText(@"C:\temp\NetLoggedon.txt", RunPSCommand(NetLoggedon));
                 Console.WriteLine(RunPSCommand(FindForeignUser));
+                System.IO.File.WriteAllText(@"C:\temp\FindForeignUser.txt", RunPSCommand(FindForeignUser));
                 Console.WriteLine(RunPSCommand(FindGoreignGroup));
+                System.IO.File.WriteAllText(@"C:\temp\FindGoreignGroup.txt", RunPSCommand(FindGoreignGroup));
                 Console.WriteLine("Press Enter to Continue...");
                 Console.ReadLine();
 
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("[+] Getting unconstrained delegation Systems, Users and Systems with RDP Access to...\n");
+                Console.WriteLine("[+] Getting unconstrained delegation Systems and Users...\n");
                 Console.ResetColor();
                 Console.WriteLine(RunPSCommand(UnconstrainedComputers));
+                System.IO.File.WriteAllText(@"C:\temp\UnconstrainedComputers.txt", RunPSCommand(UnconstrainedComputers));
                 Console.WriteLine(RunPSCommand(UnconstrainedUsers));
+                System.IO.File.WriteAllText(@"C:\temp\UnconstrainedUsers.txt", RunPSCommand(UnconstrainedUsers));
+                Console.WriteLine("Press Enter to Continue...");
+                Console.ReadLine();
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("[+] Getting Systems with RDP Access to...\n");
+                Console.ResetColor();
                 Console.WriteLine(RunPSCommand(RDPAccess));
+                System.IO.File.WriteAllText(@"C:\temp\RDPAccess.txt", RunPSCommand(RDPAccess));
                 Console.WriteLine("Press Enter to Continue...");
                 Console.ReadLine();
             }
@@ -1168,9 +1203,14 @@ namespace p0wnedShell
             {
                 pipeline.Commands.AddScript(Resources.Invoke_Encode());
             }
+            if (cmd.IndexOf("jaws-enum", 0, StringComparison.OrdinalIgnoreCase) != -1)
+            {
+                pipeline.Commands.AddScript(Resources.jaws_enum());
+            }
 
             pipeline.Commands.AddScript(Resources.Invoke_PowerView());
             pipeline.Commands.AddScript(Resources.Invoke_PowerUp());
+            //pipeline.Commands.AddScript(Resources.Invoke_PowerViewdev());
             pipeline.Commands.AddScript(cmd);
 
             //Prep PS for string output and invoke
